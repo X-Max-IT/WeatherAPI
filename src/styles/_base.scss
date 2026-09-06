@@ -1,0 +1,22 @@
+@use "./variables" as *;
+
+body {
+  margin: 0;
+  font-family: "Arial", sans-serif;
+  background: var(--background-body);
+  color: var(--color-text);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-attachment: fixed;
+  font-weight: 400;
+  line-height: 1.28;
+}
+
+a,
+button,
+input,
+svg * {
+  transition-duration: var(--transition-duration);
+}

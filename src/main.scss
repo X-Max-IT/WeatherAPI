@@ -1,0 +1,7 @@
+@use "./styles/base";
+@use "./styles/reset";
+
+@use "./components/WeatherWidget/weatherWidget";
+@use "./components/WeatherCard/weatherCard";
+@use "./components/Loader/loader";
+@use "./components/Error/error";
