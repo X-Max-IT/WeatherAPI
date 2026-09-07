@@ -1,8 +1,8 @@
-const KEY_API = "d50ef4f57d9342f78be72527260509";
+import { API_KEY } from "../../config";
 
 export async function weatherApi(query) {
   const response = await fetch(
-    `http://api.weatherapi.com/v1/current.json?key=${KEY_API}&q=${query}`,
+    `http://api.weatherapi.com/v1/current.json?key=${API_KEY}&q=${query}`,
   );
   return response.json();
 }

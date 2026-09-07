@@ -11,6 +11,7 @@ body {
   background-attachment: fixed;
   font-weight: 400;
   line-height: 1.28;
+  transition: background 0.3s ease;
 
   &.body--sunny {
     background: var(--background-sunny);
