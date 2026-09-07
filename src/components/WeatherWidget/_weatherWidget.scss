@@ -1,0 +1,39 @@
+.widget {
+  &__container {
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    border-radius: 10px;
+    border: var(--border);
+  }
+  &__title {
+    text-align: center;
+  }
+  &__search {
+    &-input {
+      width: 100%;
+      padding: var(--padding-input);
+      border-radius: 10px;
+      border: 1px solid transparent;
+      color: var(--color-text-input);
+      background: #f1f1f1;
+      outline: none;
+      transition:
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
+
+      &::placeholder {
+        opacity: 0.6;
+      }
+      &:focus {
+        border-color: #63b3ed;
+        box-shadow: 0 0 8px rgba(52, 140, 255, 0.5);
+      }
+    }
+  }
+  &__result {
+    min-height: 312px;
+  }
+}

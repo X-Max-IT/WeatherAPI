@@ -2,11 +2,11 @@ export function WeatherCard({ weather }) {
   return (
     <article className="card">
       <header className="card__header">
-        <h2 className="card__city">
+        <h3 className="card__city">
           {weather
             ? `${weather.location.name}, ${weather.location.country}`
             : "Enter the city"}
-        </h2>
+        </h3>
         {weather?.current.condition.icon ? (
           <img
             src={weather.current.condition.icon}
@@ -17,19 +17,19 @@ export function WeatherCard({ weather }) {
           <span>❔</span>
         )}
 
-        <h2 className="card__temperature">
+        <p className="card__temperature">
           {weather?.current?.temp_c != null
             ? Math.round(weather.current.temp_c)
             : "--"}
           °C
-        </h2>
+        </p>
         <p className="card__description">
           {weather?.current?.condition?.text ?? "Enter the city"}
         </p>
       </header>
       <footer className="card__footer">
         <div className="card__item">
-          <img className="card__item-icon" src="/ветер.svg" />
+          <img className="card__item-icon" src="/ветер(line).svg" />
           <p className="card__item-text">
             {weather?.current?.wind_kph ?? "--"} km/h
             <br />
@@ -37,7 +37,7 @@ export function WeatherCard({ weather }) {
           </p>
         </div>
         <div className="card__item">
-          <img className="card__item-icon" src="/капля.svg" />
+          <img className="card__item-icon h-two-o" src="/капля.svg" />
           <p className="card__item-text">
             {weather?.current?.humidity ?? "0"}%
             <br />

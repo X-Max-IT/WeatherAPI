@@ -9,16 +9,40 @@ export function WeatherWidget() {
   const [weatherData, setWeatherData] = useState(null);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const [weatherType, setWeatherType] = useState("sunny");
+  const [coords, setCoords] = useState(null);
 
   useEffect(() => {
-    if (!city.trim()) {
+    // Получение геопозиции
+    if (!navigator.geolocation)
+      return setError("The geolocation is unavailable");
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        console.log(position);
+        const { latitude, longitude } = position.coords;
+        setCoords({ latitude, longitude });
+      },
+      (err) => {
+        console.error("Geolocation error", err.message);
+        setError("Your geolocation is disabled");
+      },
+    );
+  }, []);
+
+  useEffect(() => {
+    // Рендер данных для виджета
+    if (!city.trim() && !coords) {
+      setWeatherData(null);
       setError(null);
       return;
     }
     setLoading(true);
     async function getData() {
       try {
-        const data = await weatherApi(city);
+        const query = city.trim()
+          ? city
+          : `${coords.latitude},${coords.longitude}`;
+        const data = await weatherApi(query);
         if (data.error) {
           setError(data.error.message);
           setWeatherData(null);
@@ -27,6 +51,8 @@ export function WeatherWidget() {
         setWeatherData(data);
         console.log(data);
         setError(null);
+        const type = getWeatherType(data.current.condition.text);
+        setWeatherType(type);
       } catch (err) {
         setError(err instanceof Error ? err.message : String(err));
         setWeatherData(null);
@@ -35,8 +61,23 @@ export function WeatherWidget() {
       }
     }
     getData();
-  }, [city]);
+  }, [city, coords]);
 
+  useEffect(() => {
+    // Определение фона body под тип погоды
+    document.body.className = `body--${weatherType}`;
+  }, [weatherType]);
+
+  function getWeatherType(condition) {
+    // Сохранение типа погоды
+    if (!condition) return;
+    const normalizedCondition = condition.toLowerCase();
+    if (normalizedCondition.includes("rain")) return "rain";
+    if (normalizedCondition.includes("thunder")) return "thunder";
+    if (normalizedCondition.includes("haze")) return "haze";
+    if (normalizedCondition.includes("overcast")) return "cloudy";
+    return "sunny";
+  }
   return (
     <section className="widget">
       <div className="widget__container">
@@ -47,13 +88,16 @@ export function WeatherWidget() {
             placeholder="Введите город"
             value={city}
             onChange={(e) => setCity(e.target.value)}
+            className="widget__search-input"
           />
         </div>
-        {loading && <Loading />}
-        {error && <Error message={error} />}
-        {!error && !loading && weatherData && (
-          <WeatherCard weather={weatherData} />
-        )}
+        <div className="widget__result">
+          {loading && <Loading />}
+          {error && <Error message={error} />}
+          {!error && !loading && weatherData && (
+            <WeatherCard weather={weatherData} />
+          )}
+        </div>
       </div>
     </section>
   );

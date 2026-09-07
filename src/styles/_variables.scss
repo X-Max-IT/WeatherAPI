@@ -1,14 +1,16 @@
 :root {
-  --background-body: linear-gradient(187deg, #ffffff, #013158);
-  --background-sunny: linear-gradient(137deg, #b4b4b4, #0985eb);
-  --background-rain: linear-gradient(137deg, #757575, #0e0088);
-  --background-thunder: linear-gradient(137deg, #272727, #070046);
+  --background-sunny: linear-gradient(137deg, #33a0fb, #066bbf);
+  --background-rain: linear-gradient(137deg, #707bff, #0005a7);
+  --background-thunder: linear-gradient(137deg, #5f5f5f, #070047);
+  --background-haze: linear-gradient(137deg, #9f9f9f, #5e7589);
+  --background-cloudy: linear-gradient(137deg, #8da6bb, #4b6e8b);
 
   --color-text: #f5f5f5;
+  --color-text-input: #473c63;
 
   --padding-input: 10px 12px;
 
-  --border: 1px solid rgba(255, 255, 255, 0.1);
+  --border: 2px solid rgba(255, 255, 255, 0.5);
 
   --transition-duration: 0.3s ease;
 }

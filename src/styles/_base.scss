@@ -3,7 +3,6 @@
 body {
   margin: 0;
   font-family: "Arial", sans-serif;
-  background: var(--background-body);
   color: var(--color-text);
   display: flex;
   justify-content: center;
@@ -12,6 +11,24 @@ body {
   background-attachment: fixed;
   font-weight: 400;
   line-height: 1.28;
+
+  &.body--sunny {
+    background: var(--background-sunny);
+  }
+
+  &.body--rain {
+    background: var(--background-rain);
+  }
+
+  &.body--thunder {
+    background: var(--background-thunder);
+  }
+  &.body--haze {
+    background: var(--background-haze);
+  }
+  &.body--cloudy {
+    background: var(--background-cloudy);
+  }
 }
 
 a,
