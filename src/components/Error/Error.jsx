@@ -1,3 +1,3 @@
 export function Error({ message }) {
-  return <p className="widget__error">{message}</p>;
+  return <p className="error__message">{message}</p>;
 }

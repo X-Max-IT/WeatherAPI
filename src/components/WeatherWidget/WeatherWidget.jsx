@@ -11,6 +11,10 @@ export function WeatherWidget() {
   const [error, setError] = useState(null);
 
   useEffect(() => {
+    if (!city.trim()) {
+      setError(null);
+      return;
+    }
     setLoading(true);
     async function getData() {
       try {
@@ -21,8 +25,11 @@ export function WeatherWidget() {
           return;
         }
         setWeatherData(data);
+        console.log(data);
         setError(null);
       } catch (err) {
+        setError(err instanceof Error ? err.message : String(err));
+        setWeatherData(null);
       } finally {
         setLoading(false);
       }
@@ -33,6 +40,7 @@ export function WeatherWidget() {
   return (
     <section className="widget">
       <div className="widget__container">
+        <h1 className="widget__title">Weather Widget</h1>
         <div className="widget__search">
           <input
             type="text"
@@ -43,7 +51,9 @@ export function WeatherWidget() {
         </div>
         {loading && <Loading />}
         {error && <Error message={error} />}
-        {weatherData && <WeatherCard />}
+        {!error && !loading && weatherData && (
+          <WeatherCard weather={weatherData} />
+        )}
       </div>
     </section>
   );

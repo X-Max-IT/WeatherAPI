@@ -1,3 +1,3 @@
 export function Loading() {
-  return <p className="widget__loader">Loading...⏳</p>;
+  return <p className="loader">Loading...⏳</p>;
 }
