@@ -1,4 +1,4 @@
-# React + Vite
+# Weather Widget | React
 
 A simple responsive weather widget built with React.
 
